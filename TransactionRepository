@@ -1,0 +1,20 @@
+package smartparking; 
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class TransactionRepository {
+    private final List<FinancialTransaction> transactions = new ArrayList<>();
+
+    public void add(FinancialTransaction t) { transactions.add(t); }
+
+    public List<FinancialTransaction> listAll() { return transactions; }
+
+    public List<FinancialTransaction> findByReservationId(String id) {
+        List<FinancialTransaction> result = new ArrayList<>();
+        for (FinancialTransaction t : transactions) {
+            if (t.getReservationId().equals(id)) result.add(t);
+        }
+        return result;
+    }
+}

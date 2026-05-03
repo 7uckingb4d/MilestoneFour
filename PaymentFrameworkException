@@ -1,0 +1,26 @@
+package smartparking;
+
+public class PaymentFrameworkException extends Exception {
+    public PaymentFrameworkException(String message) { super(message); }
+    public PaymentFrameworkException(String message, Throwable cause) { super(message, cause); }
+}
+
+class InsufficientCreditException extends PaymentFrameworkException {
+    public InsufficientCreditException(String message) { super(message); }
+}
+
+class InvalidPaymentMethodException extends PaymentFrameworkException {
+    public InvalidPaymentMethodException(String message) { super(message); }
+}
+
+class NegativeAmountException extends PaymentFrameworkException {
+    public NegativeAmountException(String message) { super(message); }
+}
+
+class InvalidDiscountException extends PaymentFrameworkException {
+    public InvalidDiscountException(String message) { super(message); }
+}
+
+class TransactionAlreadySettledException extends PaymentFrameworkException {
+    public TransactionAlreadySettledException(String message) { super(message); }
+}

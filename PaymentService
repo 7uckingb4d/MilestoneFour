@@ -1,0 +1,24 @@
+package smartparking;
+
+public class PaymentService {
+    private final TransactionRepository repo;
+    private final PaymentProcessor processor;
+
+    public PaymentService(TransactionRepository repo, PaymentProcessor processor) {
+        this.repo = repo;
+        this.processor = processor;
+    }
+
+    public PaymentReceipt chargeReservation(String reservationId, String buyerName,
+                                            double amount, double balance, double discountRate) {
+        GCashPayment payment = new GCashPayment(buyerName, amount, balance, discountRate);
+        PaymentReceipt receipt = payment.processInvoice(processor);
+
+        if (receipt.isSuccess()) {
+            repo.add(new FinancialTransaction(reservationId,
+                    FinancialTransaction.Type.CHARGE,
+                    receipt.getAmount(), "GCASH"));
+        }
+        return receipt;
+    }
+}
